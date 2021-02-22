@@ -56,7 +56,7 @@ inquirer
 
     let readMeString = generateMarkdown(data);
 
-    fs.writeFile("README.md", readMeString, (err) =>
+    fs.writeFile("sampleREADME.md", readMeString, (err) =>
       err ? console.log(err) : console.log('Success!')
     );
   });
