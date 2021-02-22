@@ -1,5 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 inquirer
   .prompt([
@@ -44,55 +45,16 @@ inquirer
         message: 'Enter your email address',
         name: 'email',
       },
+      {
+        type: 'list',
+        choices: ['Apache License 2.0', 'BSD 3-Clause', 'BSD 2-Clause' , 'GNU General Public License', 'GNU Library', 'ISC License', 'MIT License', 'Mozilla Public License', 'Eclipse Public License version 2.0', 'Not listed'],
+        message: 'Select a license',
+        name: 'license',
+      },
   ])
   .then((data) => {
 
-    let readMeString = `# ${data.title}
-
-## Table of Contents
-1. [ Application Description. ](#application)
-2. [ Installation. ](#installation)
-2. [ Usage. ](#usage)
-3. [ Contributing. ](#contribution)
-4. [ Test. ](#test)
-5. [ Questions. ](#questions)
-6. [ The other stuff: License & Badges. ](#license)
-
-
-<a name="application"></a>
-## Application Description.
-
-${data.description}.
-<a name="installation"></a>
-## Installation.
-
-${data.installation}.
-
-<a name="usage"></a>
-## Usage
-
-${data.usage}.
-
-<a name="contribution"></a>
-## Contributing
-
-${data.contribution}.
-
-<a name="test"></a>
-## Test
-
-${data.test}.
-
-<a name="questions"></a>
-## Questions
-
-If you have any questions, feel free to contact at ${data.email}. Don't forget to check my GitHub profile: ${data.github}.
-
-<a name="license"></a>
-## Licenses & Badges
-
-.
-`
+    let readMeString = generateMarkdown(data);
 
     fs.writeFile("README.md", readMeString, (err) =>
       err ? console.log(err) : console.log('Success!')
