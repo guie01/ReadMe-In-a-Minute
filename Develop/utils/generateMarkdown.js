@@ -76,6 +76,8 @@ function generateMarkdown(data) {
   ## Questions
   
   If you have any questions, feel free to contact at ${data.email}. Don't forget to check my GitHub profile: ${data.github}.
+
+  (https://github.com/${data.github}/${data.title})
   
   ${renderLicenseSection(data.license)}.
   
